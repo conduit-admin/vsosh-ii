@@ -101,8 +101,8 @@ body {
   padding: 24px 2.5px 22px;
 }
 
-/* Название — как заголовок заметки на «Бумаге»: крупно и жирным,
-   под ним тихая строка, о чём сайт. */
+/* Название — как заголовок заметки на «Бумаге»: крупно и жирным.
+   Подписи под ним нет (владелец, 20.10.2026). */
 .site-head { min-width: 0; }
 
 .site-title {
@@ -112,12 +112,6 @@ body {
   font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.15;
-}
-
-.site-sub {
-  margin: 2px 0 0;
-  color: var(--ink-muted);
-  font-size: 15.5px;
 }
 
 .sr-only {

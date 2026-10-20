@@ -9,8 +9,8 @@
      "title": "Школьный этап",
      "kind": "Серия 1 · 16 задач",
      "date": "2026-10-20",
-     "href": "data/files/seriya-01.pdf?v=3f92d8e688",
-     "thumb": "data/thumbs/seriya-01.png?v=3f92d8e688"
+     "href": "data/files/seriya-01.pdf?v=3d41ebeb64",
+     "thumb": "data/thumbs/seriya-01.png?v=3d41ebeb64"
     }
    ]
   },
@@ -18,11 +18,18 @@
    "title": "Теория",
    "items": [
     {
+     "title": "База Python",
+     "kind": "",
+     "date": "2026-10-20",
+     "href": "data/files/baza-python.pdf?v=d8e2e07e49",
+     "thumb": "data/thumbs/baza-python.png?v=d8e2e07e49"
+    },
+    {
      "title": "Данные и метрики",
      "kind": "",
      "date": "2026-10-20",
-     "href": "data/files/dannye-teoriya.pdf?v=9daae68897",
-     "thumb": "data/thumbs/dannye-teoriya.png?v=9daae68897"
+     "href": "data/files/dannye-teoriya.pdf?v=7ce73e9bda",
+     "thumb": "data/thumbs/dannye-teoriya.png?v=7ce73e9bda"
     }
    ]
   }

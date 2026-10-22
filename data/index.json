@@ -1,5 +1,5 @@
 {
- "date": "2026-10-20",
+ "date": "2026-10-22",
  "url": "https://conduit-admin.github.io/vsosh-ii/",
  "groups": [
   {
@@ -20,9 +20,9 @@
     {
      "title": "Файлы CSV",
      "kind": "",
-     "date": "2026-10-20",
-     "href": "data/files/csv.pdf?v=3ea74c0e2b",
-     "thumb": "data/thumbs/csv.png?v=3ea74c0e2b"
+     "date": "2026-10-22",
+     "href": "data/files/csv.pdf?v=7a4707b41e",
+     "thumb": "data/thumbs/csv.png?v=7a4707b41e"
     }
    ]
   }

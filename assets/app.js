@@ -1,9 +1,10 @@
-/* ВсОШ по ИИ — одна страница: разделы с листками и проверка решений.
+/* ВсОШ по ИИ — главная: трейлы задач, разделы с листками и проверка решений.
 
    Сборки нет: страница читает data/index.json прямо в браузере. Индекс,
    PDF, миниатюры и архив проверки пишет скрипт выкладки в knowledge
    (.claude/meta/push-vsosh-ii.py) — руками здесь правится только код.
-   Строки, группы и разделы устроены как на 11-1, откуда взят этот код. */
+   Строки, группы и разделы устроены как на 11-1, откуда взят этот код.
+   Сами задачи трейлов — на своей странице, treyl.html. */
 (function () {
   "use strict";
 
@@ -50,7 +51,7 @@
   }
 
   /* Строка ведёт прямо в PDF, в новой вкладке. Под названием — подпись:
-     у серии номер и число задач. В группе название уже стоит в её шапке,
+     у трейла число задач и метки. В группе название уже стоит в её шапке,
      и строка подписана одной подписью. */
   function row(item, inSet) {
     var a = el("a", "row");
@@ -154,6 +155,29 @@
     return sec;
   }
 
+  /* ── трейлы ──────────────────────────────────────────────
+
+     Трейл — длинный список задач; на главной он одной строкой: название,
+     число задач и метки. Строка ведёт на его страницу treyl.html#<трейл>
+     в той же вкладке — это часть сайта, а не файл. Число на плашке —
+     задачи всех трейлов. */
+  function trailsBlock(trails) {
+    var sec = el("section", "block");
+    var total = trails.reduce(function (n, t) { return n + (parseInt(t.kind, 10) || 0); }, 0);
+    sec.appendChild(blockHead("Трейлы", total || null));
+    var stack = el("div", "stack");
+    var panel = el("div", "panel");
+    trails.forEach(function (t) {
+      var a = row(t);
+      a.removeAttribute("target");
+      a.removeAttribute("rel");
+      panel.appendChild(a);
+    });
+    stack.appendChild(panel);
+    sec.appendChild(stack);
+    return sec;
+  }
+
   /* ── проверка решений ────────────────────────────────────
 
      Строка архива — скачивание, а не переход: kontest.zip сразу
@@ -196,9 +220,11 @@
     var main = document.getElementById("main");
     main.textContent = "";
     var groups = (data.groups || []).filter(function (g) { return g.items && g.items.length; });
-    if (!groups.length && !data.kontest) {
+    var trails = data.treyly || [];
+    if (!groups.length && !trails.length && !data.kontest) {
       main.appendChild(el("p", "empty", "Пока здесь ничего нет."));
     }
+    if (trails.length) main.appendChild(trailsBlock(trails));
     groups.forEach(function (g) { main.appendChild(block(g)); });
     if (data.kontest) main.appendChild(kontestBlock(data.kontest));
   }

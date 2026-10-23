@@ -1,8 +1,9 @@
 /* ВсОШ по ИИ — оформление «Бумага», как у «Лучезарности» и 11-1
    (web/styles/bumaga.md в knowledge). Основа — стили 11-1 без таблиц
-   результатов и логотипа «Петли»; своё — название в шапке словами
-   и инструкция по проверке, разобранная из markdown. Свободны в цвете
-   только обложки документов. Тема одна, светлая. */
+   результатов и логотипа «Петли»; своё — инструкция по проверке,
+   разобранная из markdown, и страница трейлов: пилюли трейлов и меток,
+   задачи карточками, формулы KaTeX. Свободны в цвете только обложки
+   документов. Тема одна, светлая. */
 
 :root {
   color-scheme: only light;
@@ -536,6 +537,245 @@ body {
 
 /* Не загрузился разборщик — инструкция простым текстом, тем же блоком. */
 .md-raw { white-space: pre-wrap; font-family: var(--font-mono); font-size: 14.5px; }
+
+/* ── страница трейлов ──────────────────────────────────── */
+
+/* Дорога на главную — тихая строка под шапкой: логотипы не ссылки. */
+.back {
+  display: inline-block;
+  margin: -6px 0 16px 2px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.back:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.back:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; border-radius: 4px; }
+
+/* Пилюли — переключатель трейлов и метки. Белые в чёрной обводке 2,
+   как все пометки «Бумаги»; выбранная — чёрная с белой надписью.
+   Золота нет: на белом оно спорит с фиолетовой шкалой продвижения. */
+.trail-switch,
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trail-switch { margin: 0 0 16px; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: var(--tap);
+  padding: 0 17px;
+  border: var(--frame-sm);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--black);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .14s ease, color .14s ease;
+}
+
+.pill:hover { background: #F1F0F2; }
+.pill:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+
+.pill[aria-current="page"],
+.pill[aria-pressed="true"] { background: var(--black); color: #FFFFFF; }
+
+.pill-count {
+  color: var(--ink-muted);
+  font-size: 0.86em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pill[aria-current="page"] .pill-count,
+.pill[aria-pressed="true"] .pill-count { color: rgba(255, 255, 255, 0.72); }
+
+/* Метки мельче трейлов, но цель касания та же — 40. */
+.pill-sm { min-height: 40px; padding: 0 14px; font-size: 15.5px; }
+
+/* Что значит выбранная метка — строкой под ними, на белой подложке:
+   текст прямо на муаре читается хуже. */
+.tag-opis {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink-muted);
+  font-size: 15.5px;
+}
+
+.tag-opis strong { color: var(--black); font-weight: 600; }
+.tag-opis[hidden] { display: none; }
+
+.list-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.list-count { color: var(--ink-muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+
+.link-btn {
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--ink-muted);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.link-btn:hover { text-decoration-color: currentColor; }
+.link-btn:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; border-radius: 4px; }
+
+/* Задача — та же карточка, что группа листков: в шапке номер, название
+   и метки, внутри — условие. Номер — серым перед названием, им задача
+   сдаётся. */
+.zad[hidden] { display: none; }
+
+.zad-top {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.zad-id {
+  flex: none;
+  min-width: 2.9em;
+  color: var(--ink-muted);
+  font-size: 15.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.zad-tags { color: var(--ink-muted); font-size: 14.5px; }
+
+.zad-body {
+  margin: 0 6px;
+  padding: 6px 10px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 16.5px;
+}
+
+.zad-body .md { margin: 0; padding: 0; border-top: 0; }
+
+/* Пункты — «а)» отдельной колонкой, текст рядом, в конце — серый код
+   пункта, ровно так, как его набирать в kontest.py. */
+.punkty {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.punkt { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); align-items: baseline; }
+.punkt-bukva { font-weight: 700; }
+.punkt-text > :first-child { margin-top: 0; }
+.punkt-text > :last-child { margin-bottom: 0; }
+
+.md code.sdat {
+  margin-left: 6px;
+  color: var(--ink-muted);
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+
+/* Пример к программе — ввод и вывод рядом, подписи сверху. */
+.primer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.primer-col { min-width: 0; }
+.primer-label { display: block; margin: 0 0 4px 2px; color: var(--ink-muted); font-size: 14px; font-weight: 600; }
+.primer pre { margin: 0; }
+
+/* Таблицы условий — цифры одной ширины, тонкие черты, шапка отчёркнута
+   чёрным. Широкая таблица прокручивается в своей обёртке. */
+.tbl { margin: 10px 0; overflow-x: auto; }
+
+.md table {
+  border-collapse: collapse;
+  font-size: 15.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.md th,
+.md td {
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.md th { border-bottom: 2px solid var(--black); font-weight: 600; }
+
+/* Файлы задачи — пилюли со скачиванием: имя и размер. */
+.zad-files {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.zad-files-label { margin-right: 2px; color: var(--ink-muted); font-size: 15px; }
+
+.file-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 13px;
+  border: var(--frame-sm);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--black);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.file-pill:hover { background: #F1F0F2; }
+.file-pill:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+.file-size { color: var(--ink-muted); font-size: 13.5px; font-weight: 400; white-space: nowrap; }
+
+/* Формулы. Выключная шире телефона прокручивается сама по себе. */
+.katex { font-size: 1.08em; }
+.katex-display { margin: 10px 0; padding: 2px 0; overflow-x: auto; overflow-y: hidden; }
+
+/* На телефоне выключная формула мельче, чтобы чаще влезала целиком. */
+@media (max-width: 420px) {
+  .katex-display > .katex { font-size: 0.96em; }
+  .zad-body { padding: 6px 6px 14px; }
+}
+
+/* Строки «что скачать» в карточке «Как сдавать» — тот же лист, что
+   на главной. */
+.md .panel { margin: 8px 0 4px; }
+.md .row { text-decoration: none; }
 
 /* ── пустое и каркас ───────────────────────────────────── */
 

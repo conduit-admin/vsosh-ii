@@ -407,6 +407,70 @@
     if (!r.task) setHash();
   }
 
+  /* ── движение, как на «Лучезарности» ─────────────────────── */
+
+  /* Смена экрана: содержимое уходит (80 мс), подменяется на погасшем
+     экране и приходит (см. «движение» в style.css). Метка — на случай
+     двух быстрых нажатий подряд: рисует только последнее. */
+  var swapToken = 0;
+
+  function enter(main, dy) {
+    main.style.setProperty("--in-dy", dy);
+    main.classList.remove("entering");
+    void main.offsetWidth;
+    main.classList.add("entering");
+  }
+
+  /* Другой задачник — уход и приход, движение нейтральное: соседний
+     экран не глубже и не выше. Та же страница с другой меткой или
+     задачей — без движения, как на «Лучезарности». */
+  function onHash() {
+    if (parseHash().trail === state.trail) { route(); return; }
+    var main = document.getElementById("main");
+    var mine = ++swapToken;
+    main.style.setProperty("--out-dy", "-4px");
+    main.classList.remove("entering");
+    main.classList.add("leaving");
+    setTimeout(function () {
+      if (mine !== swapToken) return;
+      window.scrollTo(0, 0);
+      main.classList.remove("leaving");
+      route();
+      enter(main, "8px");
+    }, 80);
+  }
+
+  /* Пришли с главной этого же сайта — задачник приходит снизу, будто
+     шагнули вглубь. Открыли по ссылке — без движения: первая загрузка
+     и на «Лучезарности» не анимируется. */
+  function fromHome() {
+    try {
+      var r = new URL(document.referrer);
+      var dir = function (p) { return p.replace(/[^/]*$/, ""); };
+      return r.origin === location.origin && dir(r.pathname) === dir(location.pathname) &&
+        !/treyl\.html$/.test(r.pathname);
+    } catch (e) { return false; }
+  }
+
+  /* Отклик на касание: класс ставится на pointerdown, анимация доигрывает
+     сама. */
+  document.addEventListener("pointerdown", function (e) {
+    var node = e.target.closest && e.target.closest(".pill, .file-pill, a.row, .set-head");
+    if (!node) return;
+    node.classList.remove("tap");
+    void node.offsetWidth;
+    node.classList.add("tap");
+  }, { passive: true });
+
+  (function () {
+    var main = document.getElementById("main");
+    /* Класс держится только на время движения: чужое движение изнутри
+       всплывает сюда же, поэтому проверяем, что доиграло наше. */
+    main.addEventListener("animationend", function (e) {
+      if (e.target === main) main.classList.remove("entering");
+    });
+  })();
+
   function fail() {
     var main = document.getElementById("main");
     main.textContent = "";
@@ -436,7 +500,8 @@
         return;
       }
       route();
-      window.addEventListener("hashchange", route);
+      if (fromHome()) enter(document.getElementById("main"), "12px");
+      window.addEventListener("hashchange", onHash);
     })
     .catch(fail);
 })();

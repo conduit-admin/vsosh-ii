@@ -186,12 +186,19 @@
      показывается он же, разобранный marked. Свёрнут, пока не откроют:
      нужен он при первой установке, а дальше мешал бы. */
   function readme(md) {
-    var body = el("div", "md");
+    var body = el("div", "md readme");
     if (window.marked) {
       body.innerHTML = window.marked.parse(md, { gfm: true, breaks: false });
       body.querySelectorAll("a[href^='http']").forEach(function (a) {
         a.target = "_blank";
         a.rel = "noopener";
+      });
+      /* Таблица — в обёртке с прокруткой, как в условиях задач: на телефоне
+         широкая таблица иначе вылезала за рамку карточки. */
+      body.querySelectorAll("table").forEach(function (t) {
+        var wrap = el("div", "tbl");
+        t.parentNode.insertBefore(wrap, t);
+        wrap.appendChild(t);
       });
     } else {
       body.appendChild(el("pre", "md-raw", md));
@@ -249,10 +256,48 @@
     });
   });
 
+  /* ── движение, как на «Лучезарности» ─────────────────────── */
+
+  /* Отклик на касание: класс ставится на pointerdown, анимация доигрывает
+     сама (см. «движение» в style.css). */
+  document.addEventListener("pointerdown", function (e) {
+    var node = e.target.closest && e.target.closest(".pill, .file-pill, a.row, .set-head");
+    if (!node) return;
+    node.classList.remove("tap");
+    void node.offsetWidth;
+    node.classList.add("tap");
+  }, { passive: true });
+
+  /* Вернулись со страницы задачников этого же сайта — главная опускается
+     сверху, как возврат в список на «Лучезарности». Открыли по ссылке —
+     без движения: первая загрузка и там не анимируется. */
+  function fromTrails() {
+    try {
+      var r = new URL(document.referrer);
+      var dir = function (p) { return p.replace(/[^/]*$/, ""); };
+      return r.origin === location.origin && dir(r.pathname) === dir(location.pathname) &&
+        /treyl\.html$/.test(r.pathname);
+    } catch (e) { return false; }
+  }
+
+  function enter(dy) {
+    var main = document.getElementById("main");
+    main.addEventListener("animationend", function done(e) {
+      if (e.target !== main) return;
+      main.classList.remove("entering");
+      main.removeEventListener("animationend", done);
+    });
+    main.style.setProperty("--in-dy", dy);
+    main.classList.add("entering");
+  }
+
   /* no-cache — сверяться с сервером при каждом открытии: список меняется,
      а Pages держит файлы в кэше по десять минут. */
   fetch("data/index.json", { cache: "no-cache" })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(render)
+    .then(function (data) {
+      render(data);
+      if (fromTrails()) enter("-9px");
+    })
     .catch(fail);
 })();

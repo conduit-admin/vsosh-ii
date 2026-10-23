@@ -13,6 +13,8 @@
   --ink: #16131C;
   --ink-muted: #756E80;
   --quiet: rgba(22, 19, 28, 0.055);
+  --quiet-on: rgba(22, 19, 28, 0.10);
+  --soft: #F1F0F2;
   --line: #D6D3DA;
   --gold-logo: #FDD17A;
 
@@ -540,8 +542,9 @@ body {
 /* ── страница задачников ──────────────────────────────────── */
 
 /* Дорога на главную — пилюля под шапкой, логотипы ведь не ссылки:
-   шеврон влево и «Все материалы». */
-.back { margin: -6px 0 14px; gap: 9px; padding-left: 15px; }
+   шеврон влево и «Все материалы». Размер — как у «Назад» на
+   «Лучезарности»: ниже пилюль задачников, 36. */
+.pill.back { min-height: 36px; margin: -6px 0 14px; gap: 9px; padding: 0 14px 0 15px; font-size: 16px; }
 
 .back-chev {
   flex: none;
@@ -552,9 +555,9 @@ body {
   transform: translateX(1px) rotate(45deg);
 }
 
-/* Пилюли — переключатель задачников и метки. Белые в чёрной обводке 2,
-   как все пометки «Бумаги»; выбранная — чёрная с белой надписью.
-   Золота нет: на белом оно спорит с фиолетовой шкалой продвижения. */
+/* Пилюли — переключатель задачников и метки, как пилюли оглавления
+   на «Лучезарности»: белые в чёрной обводке 2, выбранная — чёрная
+   с белой надписью. Число — медальоном, см. .pill-count. */
 .trail-switch,
 .chips {
   display: flex;
@@ -569,13 +572,13 @@ body {
   align-items: center;
   gap: 7px;
   min-height: var(--tap);
-  padding: 0 17px;
+  padding: 0 16px;
   border: var(--frame-sm);
   border-radius: 999px;
   background: var(--surface);
   color: var(--black);
   font: inherit;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.2;
   text-decoration: none;
@@ -583,23 +586,37 @@ body {
   transition: background-color .14s ease, color .14s ease;
 }
 
-.pill:hover { background: #F1F0F2; }
+.pill:hover { background: var(--soft); }
 .pill:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
 
 .pill[aria-current="page"],
 .pill[aria-pressed="true"] { background: var(--black); color: #FFFFFF; }
 
+/* Число — чёрный медальон с золотой цифрой, как на «Лучезарности»: круг
+   на одну цифру, пилюля на две. Золото знака — только на чёрном, это
+   правило «Бумаги» соблюдено. В выбранной, чёрной, пилюле медальон
+   белеет: чёрный на чёрном пропал бы. */
 .pill-count {
-  color: var(--ink-muted);
-  font-size: 0.86em;
+  display: inline-grid;
+  place-items: center;
+  min-width: 25px;
+  height: 25px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--black);
+  color: var(--gold-logo);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 
 .pill[aria-current="page"] .pill-count,
-.pill[aria-pressed="true"] .pill-count { color: rgba(255, 255, 255, 0.72); }
+.pill[aria-pressed="true"] .pill-count { background: #FFFFFF; color: var(--black); }
 
 /* Метки мельче задачников, но цель касания та же — 40. */
-.pill-sm { min-height: 40px; padding: 0 14px; font-size: 15.5px; }
+.pill-sm { min-height: 40px; padding: 0 12px 0 14px; font-size: 15px; }
+.pill-sm .pill-count { min-width: 22px; height: 22px; padding: 0 6px; font-size: 12.5px; }
 
 /* Картинка задачника — кружком в начале пилюли, вплотную к её краю, как
    аватар. В чёрной выбранной пилюле бледный круг картинки светится. */
@@ -631,7 +648,7 @@ body {
    текст прямо на муаре читается хуже. */
 .tag-opis {
   margin: 0;
-  padding: 8px 12px;
+  padding: 9px 14px;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.92);
   color: var(--ink-muted);
@@ -735,6 +752,18 @@ body {
 
 .md th { border-bottom: 2px solid var(--black); font-weight: 600; }
 
+/* В инструкции таблицы словесные, а не столбцы чисел: текст в ячейках
+   переносится, иначе на телефоне таблица шире карточки. Код задачи
+   (`ml10`) не рвётся, строка рвётся между кодами. Не уместилась и так —
+   прокрутится в обёртке. */
+.readme th,
+.readme td { white-space: normal; }
+.readme td code { white-space: nowrap; }
+
+@media (max-width: 420px) {
+  .md th, .md td { padding: 4px 6px; }
+}
+
 /* Файлы задачи — пилюли со скачиванием: имя и размер. */
 .zad-files {
   display: flex;
@@ -792,16 +821,74 @@ body {
   color: var(--ink-muted);
 }
 
-.skeleton { display: grid; gap: 12px; }
+/* Каркас, пока едут данные, — как на «Лучезарности»: по нему слева
+   направо бежит светлая полоса. Пустая страница за то же время читается
+   как зависание, а бегущий каркас — как работа. */
+.skeleton { display: grid; gap: 8px; }
 
-.skeleton span {
+.skel-head, .skel-row {
   display: block;
   border-radius: var(--radius-sm);
   background: var(--quiet);
+  background-image: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.7) 50%, transparent 80%);
+  background-size: 220% 100%;
+  animation: sweep 1.25s linear infinite;
 }
 
-.skel-head { height: 48px; }
-.skel-row { height: 72px; }
+.skel-head { height: 44px; }
+.skel-row { height: 62px; border-radius: var(--radius); }
+
+@keyframes sweep {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+/* ── движение ──────────────────────────────────────────── */
+
+/* То же, что на «Лучезарности». Смена экрана — содержимое уходит и
+   приходит целиком, одним слоем: прозрачность и маленький сдвиг на всём
+   #main. Уход короткий и с разгоном, приход длиннее и с торможением —
+   читается как одно движение вперёд. Направление сдвига задаёт скрипт:
+   к задачнику — снизу, будто шагнули вглубь; обратно на главную —
+   сверху; соседний задачник — нейтрально. Шапка не движется. */
+#main.leaving {
+  opacity: 0;
+  transform: translateY(var(--out-dy, 0));
+  transition: opacity .08s ease-in, transform .08s ease-in;
+}
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(var(--in-dy, 8px)); }
+  to { opacity: 1; transform: none; }
+}
+
+#main.entering { animation: screenIn .26s cubic-bezier(.22, .8, .24, 1) both; }
+
+/* Отклик на касание. Класс ставит скрипт на pointerdown — через :active
+   на телефоне не выходит: браузер придерживает состояние, пока не
+   убедится, что палец не поехал прокручивать. Пилюли сжимаются;
+   строки и шапки групп — во всю ширину, им сжатие было бы рывком,
+   они отзываются подсветкой. */
+@keyframes tap {
+  0% { transform: scale(.92); }
+  100% { transform: scale(1); }
+}
+
+@keyframes tapRow {
+  0% { background-color: var(--quiet-on); }
+  100% { background-color: transparent; }
+}
+
+.pill.tap, .file-pill.tap { animation: tap .19s cubic-bezier(.2, .8, .3, 1); }
+a.row.tap, .set-head.tap { animation: tapRow .4s ease-out; }
+
+/* Движение выключается системной настройкой — она не про красоту. */
+@media (prefers-reduced-motion: reduce) {
+  #main.leaving { transition: none; }
+  #main.entering { animation: none; }
+  .pill.tap, .file-pill.tap, a.row.tap, .set-head.tap { animation: none; }
+  .skel-head, .skel-row { animation: none; background-image: none; }
+}
 
 @media (max-width: 420px) {
   .row { gap: 10px; padding: 8px 6px; }

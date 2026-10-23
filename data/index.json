@@ -1,5 +1,5 @@
 {
- "date": "2026-10-22",
+ "date": "2026-10-23",
  "url": "https://conduit-admin.github.io/vsosh-ii/",
  "groups": [
   {
@@ -11,6 +11,13 @@
      "date": "2026-10-20",
      "href": "data/files/seriya-01.pdf?v=e9747498a1",
      "thumb": "data/thumbs/seriya-01.png?v=e9747498a1"
+    },
+    {
+     "title": "Таблицы",
+     "kind": "Серия 2 · 12 задач",
+     "date": "2026-10-23",
+     "href": "data/files/seriya-02.pdf?v=f7f8394207",
+     "thumb": "data/thumbs/seriya-02.png?v=f7f8394207"
     }
    ]
   },
@@ -18,11 +25,11 @@
    "title": "Теория",
    "items": [
     {
-     "title": "Файлы CSV",
+     "title": "Таблицы в pandas",
      "kind": "",
-     "date": "2026-10-22",
-     "href": "data/files/csv.pdf?v=7a4707b41e",
-     "thumb": "data/thumbs/csv.png?v=7a4707b41e"
+     "date": "2026-10-23",
+     "href": "data/files/tablicy.pdf?v=556d1669f0",
+     "thumb": "data/thumbs/tablicy.png?v=556d1669f0"
     }
    ]
   }
@@ -30,9 +37,9 @@
  "kontest": {
   "section": "Проверка решений",
   "title": "Архив с проверкой",
-  "kind": "kontest.zip · 34 КБ · 1 серия",
-  "date": "2026-10-20",
-  "href": "data/kontest.zip?v=9c3e45851c",
+  "kind": "kontest.zip · 111 КБ · 2 серии",
+  "date": "2026-10-23",
+  "href": "data/kontest.zip?v=7f01c237a7",
   "thumb": "data/thumbs/kontest.svg?v=c0541ee8e1",
   "readme": "## Установка\n\n1. Python 3.9 или новее — [python.org](https://www.python.org/downloads/).\n   На Windows при установке отметь «Add python.exe to PATH».\n2. Скачай `kontest.zip` и распакуй. Работать нужно в папке, где лежит\n   `kontest.py`: Windows при «Извлечь все» кладёт её внутрь ещё одной\n   папки `kontest`.\n3. Если решаешь задачи на данные или пишешь программы с pandas и numpy,\n   поставь их; самой проверке они не нужны:\n\n   ```\n   python -m pip install pandas numpy\n   ```\n\n## Как сдавать\n\nОткрой терминал в папке с `kontest.py`:\n\n- **Windows** — открой папку в Проводнике, щёлкни по адресной строке,\n  набери `cmd` и нажми Enter. Или правый щелчок по пустому месту\n  папки → «Открыть в Терминале».\n- **macOS** — открой «Терминал», набери `cd ` с пробелом, перетащи папку\n  в окно и нажми Enter.\n- **Linux** — правый щелчок в папке → «Открыть в терминале».\n\nСначала проверь, что всё работает: `python kontest.py itog` должен\nпоказать таблицу задач серии с нулями. Если `python` не находится или\nоткрывает Microsoft Store, на Windows пиши `py`, на macOS и Linux —\n`python3`.\n\n```\npython kontest.py itog                # таблица баллов\npython kontest.py 1a 5/8              # ответ на пункт а) задачи 1\npython kontest.py 6a 9 10 8 7         # ответ из нескольких чисел\npython kontest.py 12b answer.csv      # ответ файлом\npython kontest.py 13 reshenie.py      # программа\npython kontest.py -s 1 itog           # другая серия, по умолчанию последняя\n```\n\n## Правила коротко\n\n- Пункты — латиницей: `a`, `b`, `c`. Дробь — `5/8` или `0.625`, можно\n  с запятой. Если условие просит округлить — округляй сам.\n- Ответ файлом — CSV с заголовком ровно как в условии. Таблицы к задачам\n  на данные лежат в `seriya-NN/dannye/`.\n- У задачи с ответом засчитывается последняя посылка.\n- Программа читает стандартный ввод и пишет в стандартный вывод.\n  Засчитывается лучшая посылка, балл — число пройденных тестов; примеры\n  из условия идут первыми и баллов не дают. Вердикты: `OK`, `WA` — неверный\n  ответ, `TL` — дольше 2 секунд (на олимпиаде обычно 1), `RE` — программа\n  упала.\n- Вышла новая серия — скачай архив заново и распакуй поверх старой папки:\n  баллы сохранятся.\n"
  }

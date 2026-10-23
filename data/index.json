@@ -7,14 +7,16 @@
    "title": "Математика",
    "kind": "13 задач · вероятность, метрики, модели, программа",
    "date": "2026-10-23",
-   "href": "treyl.html#mat"
+   "href": "treyl.html#mat",
+   "thumb": "data/thumbs/treyl-mat.svg?v=9869ecbf2f"
   },
   {
    "id": "ml",
    "title": "ML",
    "kind": "27 задач · pandas, чистка, группы, numpy, функция, без циклов",
    "date": "2026-10-23",
-   "href": "treyl.html#ml"
+   "href": "treyl.html#ml",
+   "thumb": "data/thumbs/treyl-ml.svg?v=9f88285176"
   }
  ],
  "groups": [

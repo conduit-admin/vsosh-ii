@@ -5,8 +5,8 @@
   {
    "id": "mat",
    "title": "Математика",
-   "heading": "Трейл «Математика»",
-   "thumb": "data/thumbs/treyl-mat.svg?v=9869ecbf2f",
+   "heading": "Задачник «Математика»",
+   "thumb": "data/thumbs/treyl-mat.svg?v=a35bfb29e9",
    "date": "2026-10-23",
    "intro": "Задачи с ответом — вероятность, метрики, модели руками — и программы.\nСписок только растёт: новые задачи дописываются в конец, номера\nне меняются. Сдача — через `kontest.py` из архива с проверкой,\nустановка — в его `README.md`. Номер задачи — `mat` и число, пункт —\nлатинской буквой:\n\n```\npython kontest.py mat1a 5/8\npython kontest.py mat10 reshenie.py\npython kontest.py itog mat\n```",
    "razdely": [
@@ -41,13 +41,13 @@
     {
      "title": "Условия одним файлом",
      "kind": "usloviya.md · 14 КБ",
-     "href": "data/treyly/mat/usloviya.md?v=bd7bbb97dc",
+     "href": "data/treyly/mat/usloviya.md?v=ce73969fdb",
      "file": "usloviya-mat.md"
     },
     {
      "title": "Архив с проверкой",
-     "kind": "kontest.zip · 230 КБ · 2 трейла, 40 задач",
-     "href": "data/kontest.zip?v=86f89d5287",
+     "kind": "kontest.zip · 230 КБ · 2 задачника, 40 задач",
+     "href": "data/kontest.zip?v=356da7aa7e",
      "file": "kontest.zip"
     }
    ],
@@ -325,8 +325,8 @@
   {
    "id": "ml",
    "title": "ML",
-   "heading": "Трейл «ML»",
-   "thumb": "data/thumbs/treyl-ml.svg?v=9f88285176",
+   "heading": "Задачник «ML»",
+   "thumb": "data/thumbs/treyl-ml.svg?v=bb747a26df",
    "date": "2026-10-23",
    "intro": "Задачи на данные: таблицы в pandas, массивы и функции в numpy, дальше —\nмодели. Список только растёт: новые задачи дописываются в конец, номера\nне меняются. Сдача — через `kontest.py` из архива с проверкой,\nустановка — в его `README.md`. Номер задачи — `ml` и число, пункт —\nлатинской буквой:\n\n```\npython kontest.py ml3a 512\npython kontest.py ml10a answer.csv\npython kontest.py ml22 pairwise.py\npython kontest.py itog ml\n```",
    "razdely": [
@@ -371,13 +371,13 @@
     {
      "title": "Условия одним файлом",
      "kind": "usloviya.md · 29 КБ",
-     "href": "data/treyly/ml/usloviya.md?v=6a1ac27f86",
+     "href": "data/treyly/ml/usloviya.md?v=cfc800db15",
      "file": "usloviya-ml.md"
     },
     {
      "title": "Архив с проверкой",
-     "kind": "kontest.zip · 230 КБ · 2 трейла, 40 задач",
-     "href": "data/kontest.zip?v=86f89d5287",
+     "kind": "kontest.zip · 230 КБ · 2 задачника, 40 задач",
+     "href": "data/kontest.zip?v=356da7aa7e",
      "file": "kontest.zip"
     }
    ],

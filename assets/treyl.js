@@ -22,17 +22,6 @@
     return n;
   }
 
-  function plural(n, one, few, many) {
-    var d = n % 10, h = n % 100;
-    if (d === 1 && h !== 11) return one;
-    if (d >= 2 && d <= 4 && (h < 12 || h > 14)) return few;
-    return many;
-  }
-
-  function tasksWord(n) {
-    return n + " " + plural(n, "задача", "задачи", "задач");
-  }
-
   /* ── markdown с формулами ────────────────────────────────
 
      Как на «Лучезарности»: код в обратных кавычках и ограждённые блоки
@@ -220,6 +209,16 @@
     DATA.treyly.forEach(function (t) {
       var a = el("a", "pill");
       a.href = "#" + t.id;
+      /* Картинка трейла — кружком в начале пилюли, та же, что миниатюрой
+         на главной. Нет её — пилюля просто без картинки. */
+      if (t.thumb) {
+        var img = el("img", "pill-img");
+        img.src = t.thumb;
+        img.alt = "";
+        img.decoding = "async";
+        a.appendChild(img);
+        a.classList.add("pill-with-img");
+      }
       a.appendChild(el("span", null, t.title));
       a.appendChild(el("span", "pill-count", String(t.zadachi.length)));
       if (t.id === state.trail) a.setAttribute("aria-current", "page");
@@ -314,17 +313,22 @@
     }
     chips.appendChild(chip("все", t.zadachi.length, null));
     t.metki.forEach(function (m) { chips.appendChild(chip(m.name, m.n, m.name)); });
-    stack.appendChild(chips);
+
+    /* «Раскрыть все» — пилюля с шевроном в одной строке с метками,
+       у правого края; не хватает места — уходит под них, тоже вправо.
+       Сколько задач видно, говорит выбранная метка — отдельной строки
+       со счётом нет. */
+    var tools = el("div", "tools");
+    tools.appendChild(chips);
+    var toggle = el("button", "pill pill-sm toggle");
+    toggle.type = "button";
+    var toggleText = el("span", null, "Раскрыть все");
+    toggle.appendChild(toggleText);
+    toggle.appendChild(el("span", "chev"));
+    tools.appendChild(toggle);
+    stack.appendChild(tools);
     var opis = el("p", "tag-opis");
     stack.appendChild(opis);
-
-    var bar = el("div", "list-bar");
-    var count = el("span", "list-count");
-    bar.appendChild(count);
-    var toggle = el("button", "link-btn", "Раскрыть все");
-    toggle.type = "button";
-    bar.appendChild(toggle);
-    stack.appendChild(bar);
 
     var list = el("div", "stack zad-list");
     var cards = t.zadachi.map(taskCard);
@@ -340,7 +344,8 @@
     function syncToggle() {
       var vis = visible();
       var allOpen = vis.length && vis.every(function (c) { return c.open; });
-      toggle.textContent = allOpen ? "Свернуть все" : "Раскрыть все";
+      toggleText.textContent = allOpen ? "Свернуть все" : "Раскрыть все";
+      toggle.setAttribute("aria-expanded", String(!!allOpen));
     }
 
     function applyFilter() {
@@ -358,8 +363,6 @@
       cards.forEach(function (c) {
         c.hidden = !!state.tag && JSON.parse(c.dataset.tags).indexOf(state.tag) < 0;
       });
-      var n = visible().length;
-      count.textContent = state.tag ? n + " из " + tasksWord(t.zadachi.length) : tasksWord(n);
       syncToggle();
     }
 

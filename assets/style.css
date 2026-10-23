@@ -540,17 +540,18 @@ body {
 
 /* ── страница трейлов ──────────────────────────────────── */
 
-/* Дорога на главную — тихая строка под шапкой: логотипы не ссылки. */
-.back {
-  display: inline-block;
-  margin: -6px 0 16px 2px;
-  color: var(--ink-muted);
-  font-size: 15px;
-  text-decoration: none;
-}
+/* Дорога на главную — пилюля под шапкой, логотипы ведь не ссылки:
+   шеврон влево и «Все материалы». */
+.back { margin: -6px 0 14px; gap: 9px; padding-left: 15px; }
 
-.back:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.back:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; border-radius: 4px; }
+.back-chev {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateX(1px) rotate(45deg);
+}
 
 /* Пилюли — переключатель трейлов и метки. Белые в чёрной обводке 2,
    как все пометки «Бумаги»; выбранная — чёрная с белой надписью.
@@ -601,6 +602,32 @@ body {
 /* Метки мельче трейлов, но цель касания та же — 40. */
 .pill-sm { min-height: 40px; padding: 0 14px; font-size: 15.5px; }
 
+/* Картинка трейла — кружком в начале пилюли, вплотную к её краю, как
+   аватар. В чёрной выбранной пилюле бледный круг картинки светится. */
+.pill-with-img { padding-left: 5px; gap: 9px; }
+
+.pill-img {
+  display: block;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Метки и «Раскрыть все» — одной строкой: метки слева, кнопка у правого
+   края; не хватает места — кнопка уходит под метки, тоже вправо. */
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.tools .chips { flex: 1 1 340px; }
+.toggle { flex: none; margin-left: auto; gap: 9px; }
+.toggle .chev { margin: 0 1px 4px 0; border-color: currentColor; }
+.toggle[aria-expanded="true"] .chev { transform: translateY(3px) rotate(225deg); }
+
 /* Что значит выбранная метка — строкой под ними, на белой подложке:
    текст прямо на муаре читается хуже. */
 .tag-opis {
@@ -614,36 +641,6 @@ body {
 
 .tag-opis strong { color: var(--black); font-weight: 600; }
 .tag-opis[hidden] { display: none; }
-
-.list-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 12px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.92);
-}
-
-.list-count { color: var(--ink-muted); font-size: 15px; font-variant-numeric: tabular-nums; }
-
-.link-btn {
-  min-height: var(--tap);
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--ink);
-  font: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: var(--ink-muted);
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-
-.link-btn:hover { text-decoration-color: currentColor; }
-.link-btn:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; border-radius: 4px; }
 
 /* Задача — та же карточка, что группа листков: в шапке номер, название
    и метки, внутри — условие. Номер — серым перед названием, им задача

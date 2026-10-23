@@ -357,7 +357,11 @@
       opis.textContent = "";
       if (meta) {
         opis.appendChild(el("strong", null, meta.name));
-        opis.appendChild(document.createTextNode(" — " + meta.opis));
+        /* Описание — строка markdown: в нём бывает код, `.npz`, `for`. */
+        var rest = el("span");
+        if (window.marked) rest.innerHTML = window.marked.parseInline(" — " + meta.opis);
+        else rest.textContent = " — " + meta.opis;
+        opis.appendChild(rest);
       }
       opis.hidden = !meta;
       cards.forEach(function (c) {

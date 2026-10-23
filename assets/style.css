@@ -640,6 +640,14 @@ body {
 }
 
 .tag-opis strong { color: var(--black); font-weight: 600; }
+
+.tag-opis code {
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: var(--quiet);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
 .tag-opis[hidden] { display: none; }
 
 /* Задача — та же карточка, что группа листков: в шапке номер, название

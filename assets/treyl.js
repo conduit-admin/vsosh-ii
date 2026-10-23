@@ -1,11 +1,11 @@
-/* ВсОШ по ИИ — страница трейлов: задачи текстом, по трейлу за раз.
+/* ВсОШ по ИИ — страница задачников: задачи текстом, по задачнику за раз.
 
    Сборки нет, как у главной: страница читает data/treyly.json. Его пишет
-   скрипт выкладки в knowledge из условий трейлов — одного markdown
-   на трейл; здесь он только показывается. Что показать, задаёт адрес:
-     #mat         трейл
-     #ml/pandas   трейл, задачи с меткой
-     #ml17        трейл, задача раскрыта и в поле зрения
+   скрипт выкладки в knowledge из условий задачников — одного markdown
+   на задачник; здесь он только показывается. Что показать, задаёт адрес:
+     #mat         задачник
+     #ml/pandas   задачник, задачи с меткой
+     #ml17        задачник, задача раскрыта и в поле зрения
    Формулы — KaTeX, разметка — marked, так же, как в заметках
    «Лучезарности»: формулы вынимаются до разбора markdown, иначе
    подчёркивания в них marked принял бы за курсив. */
@@ -151,7 +151,7 @@
     head.appendChild(el("span", "chev"));
     box.appendChild(head);
 
-    /* Тело рисуется при первом раскрытии: формулы и таблицы трейла целиком
+    /* Тело рисуется при первом раскрытии: формулы и таблицы задачника целиком
        сразу не нужны. */
     var filled = false;
     function fill() {
@@ -202,14 +202,14 @@
     return box;
   }
 
-  /* ── трейл ───────────────────────────────────────────────── */
+  /* ── задачник ───────────────────────────────────────────────── */
   function switcher() {
     var nav = el("nav", "trail-switch");
-    nav.setAttribute("aria-label", "Трейлы");
+    nav.setAttribute("aria-label", "Задачники");
     DATA.treyly.forEach(function (t) {
       var a = el("a", "pill");
       a.href = "#" + t.id;
-      /* Картинка трейла — кружком в начале пилюли, та же, что миниатюрой
+      /* Картинка задачника — кружком в начале пилюли, та же, что миниатюрой
          на главной. Нет её — пилюля просто без картинки. */
       if (t.thumb) {
         var img = el("img", "pill-img");
@@ -278,7 +278,7 @@
     var t = DATA.treyly.filter(function (x) { return x.id === state.trail; })[0];
     var main = document.getElementById("main");
     main.textContent = "";
-    document.title = t.title + " · Трейлы · ВсОШ по ИИ";
+    document.title = t.title + " · Задачники · ВсОШ по ИИ";
 
     main.appendChild(switcher());
 
@@ -292,7 +292,7 @@
     stack.appendChild(about(t));
 
     /* Метки — кнопки: одна выбрана или ни одной. Под ними — что метка
-       значит: так в трейл перешли вступления прежних блоков серий. */
+       значит: так в задачник перешли вступления прежних блоков серий. */
     var known = t.metki.map(function (m) { return m.name; });
     if (state.tag && known.indexOf(state.tag) < 0) state.tag = null;
     var chips = el("div", "chips");
@@ -410,7 +410,7 @@
   function fail() {
     var main = document.getElementById("main");
     main.textContent = "";
-    main.appendChild(el("p", "empty", "Трейлы не загрузились. Обновите страницу."));
+    main.appendChild(el("p", "empty", "Задачники не загрузились. Обновите страницу."));
   }
 
   /* Знаки в шапке — как на главной: нажатие запускает только анимацию. */
@@ -432,7 +432,7 @@
       if (!DATA.treyly || !DATA.treyly.length) {
         var main = document.getElementById("main");
         main.textContent = "";
-        main.appendChild(el("p", "empty", "Трейлов пока нет."));
+        main.appendChild(el("p", "empty", "Задачников пока нет."));
         return;
       }
       route();

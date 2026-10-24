@@ -1,5 +1,5 @@
 {
- "date": "2026-10-24",
+ "date": "2026-10-25",
  "url": "https://conduit-admin.github.io/vsosh-ii/",
  "treyly": [
   {
@@ -49,6 +49,27 @@
        "date": "2026-10-23",
        "href": "data/files/massivy-shpargalka.pdf?v=9bb96643cf",
        "thumb": "data/thumbs/massivy-shpargalka.png?v=9bb96643cf"
+      }
+     ]
+    },
+    {
+     "id": "matricy",
+     "title": "Матрицы как преобразования",
+     "date": "2026-10-25",
+     "items": [
+      {
+       "title": "Матрицы как преобразования",
+       "kind": "Урок",
+       "date": "2026-10-25",
+       "href": "data/files/matricy.pdf?v=b3935ee0e5",
+       "thumb": "data/thumbs/matricy.png?v=b3935ee0e5"
+      },
+      {
+       "title": "Матрицы как преобразования",
+       "kind": "Шпаргалка",
+       "date": "2026-10-25",
+       "href": "data/files/matricy-shpargalka.pdf?v=50e1caca71",
+       "thumb": "data/thumbs/matricy-shpargalka.png?v=50e1caca71"
       }
      ]
     },

@@ -113,8 +113,10 @@
     return box;
   }
 
+  /* Подпись группы — число файлов; у группы внешних ссылок (варианты
+     этапов там, где их выложили) скрипт выкладки даёт свою, «3 ссылки». */
   function set(entry) {
-    var meta = [files(entry.items.length)];
+    var meta = [entry.meta || files(entry.items.length)];
     if (entry.date) meta.push(shortDate(entry.date));
     var body = el("div", "set-body");
     entry.items.forEach(function (item) { body.appendChild(row(item, true)); });

@@ -200,6 +200,107 @@
      ]
     }
    ]
+  },
+  {
+   "title": "Муниципальный этап",
+   "items": [
+    {
+     "title": "Московская область, 2026/27",
+     "kind": "Страница этапа: задания и видеоразбор · этап 21.11.2026",
+     "date": "",
+     "href": "https://olympmo.ru/vos-mun-2026-2027.html"
+    },
+    {
+     "id": "municipal-1",
+     "title": "Москва, 2025/26",
+     "date": "",
+     "items": [
+      {
+       "title": "Москва, 2025/26",
+       "kind": "Задания",
+       "date": "",
+       "href": "https://informatikaexpert.ru/wp-content/uploads/2026/01/tasks-ai-9-11-mun-msk-25-26.pdf"
+      },
+      {
+       "title": "Москва, 2025/26",
+       "kind": "Решения",
+       "date": "",
+       "href": "https://informatikaexpert.ru/wp-content/uploads/2026/01/ans-ai-9-11-mun-msk-25-26.pdf"
+      }
+     ],
+     "meta": "2 ссылки · этап 17.12.2025"
+    },
+    {
+     "id": "municipal-2",
+     "title": "Свердловская область, 2025/26",
+     "date": "",
+     "items": [
+      {
+       "title": "Свердловская область, 2025/26",
+       "kind": "Задания",
+       "date": "",
+       "href": "https://zsfond.ru/wp-content/uploads/2025/12/zadaniya-iskusstvennyj-intellekt-dlya-uchenikov-9-11-klassov.pdf"
+      },
+      {
+       "title": "Свердловская область, 2025/26",
+       "kind": "Решения",
+       "date": "",
+       "href": "https://informatikaexpert.ru/wp-content/uploads/2025/12/olimp-inf-ii-sveroblast-2025-9-11-sol.pdf"
+      },
+      {
+       "title": "Свердловская область, 2025/26",
+       "kind": "Критерии",
+       "date": "",
+       "href": "https://informatikaexpert.ru/wp-content/uploads/2025/12/olimp-inf-ii-sveroblast-2025-kriteri.pdf"
+      }
+     ],
+     "meta": "3 ссылки"
+    },
+    {
+     "id": "municipal-3",
+     "title": "Сириус, 2025/26, три варианта",
+     "date": "",
+     "items": [
+      {
+       "title": "Сириус, 2025/26, три варианта",
+       "kind": "Вариант I: условия и разбор",
+       "date": "",
+       "href": "https://uts.sirius.online/smt-portal/content/_image/94185d4b2978409423b05fd1d88eef7950cb9c79"
+      },
+      {
+       "title": "Сириус, 2025/26, три варианта",
+       "kind": "Вариант II: условия и разбор",
+       "date": "",
+       "href": "https://uts.sirius.online/smt-portal/content/_image/e88fd7a0351850ebc3987cb3b9598978563fafb2"
+      },
+      {
+       "title": "Сириус, 2025/26, три варианта",
+       "kind": "Вариант III: условия и разбор",
+       "date": "",
+       "href": "https://uts.sirius.online/smt-portal/content/_image/2cc2b64b4a2c96dc46913938beea399f481b48b6"
+      },
+      {
+       "title": "Сириус, 2025/26, три варианта",
+       "kind": "Форма и число заданий",
+       "date": "",
+       "href": "https://my.sirius.online/content/forma_i_kolichestvo_zadanij_programmnoe_obespechenie_ii_me.pdf"
+      },
+      {
+       "title": "Сириус, 2025/26, три варианта",
+       "kind": "Страница этапа",
+       "date": "",
+       "href": "https://siriusolymp.ru/2025/municipal/ai"
+      }
+     ],
+     "meta": "5 ссылок"
+    },
+    {
+     "title": "Тестовый вариант организаторов",
+     "kind": "Яндекс Контест, 3 часа, нужен вход",
+     "date": "",
+     "href": "https://contest.yandex.ru/contest/84849"
+    }
+   ]
   }
  ],
  "kontest": {
